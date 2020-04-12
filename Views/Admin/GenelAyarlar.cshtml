@@ -1,0 +1,111 @@
+﻿@model IEnumerable<KoronaTakipV2.Models.AdminObjects.UpdateTime>
+
+@{
+    ViewData["Title"] = "GenelAyarlar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>
+                            GenelAyarlar
+                            @if (TempData["sonuc1"] != null)
+                            {
+                                <small class="text-muted text-sm alert alert-success">Bilgiler Güncellendi. </small>
+                            }
+                            else if (TempData["sonuc0"] != null)
+                            {
+                                <small class="text-muted text-sm alert alert-danger">Bilgiler Güncellenemedi. </small>
+                            }
+                            else
+                            {
+                                <small class="text-muted text-sm ">Panele Hoşgeldiniz. </small>
+                            }
+
+
+                        </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <p>Sitede yayınlanan bilgileri güncelle.</p>
+                        @if (TempData["exHata"] != null)
+                        {
+                            <p class="alert alert-danger">@TempData["exHata"]</p>
+                        }
+
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-title">Güncellenecek Bölüm</th>
+                                        <th class="column-title">Son Güncelleme Tarihi</th>
+                                        <th class="column-title no-link last">
+                                            <span class="nobr">Action</span>
+                                        </th>
+                                        <th class="bulk-actions" colspan="7">
+                                            <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="even pointer">
+                                            <td class=" ">@item.ActionName</td>
+                                            <td class=" ">@item.Updated</td>
+                                            <td class=" last">
+                                                <a asp-action="@item.ActionName">Güncelle</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    @*<tr class="even pointer">
+                                        <td class=" ">Time Line Bilgisi</td>
+                                        <td class=" ">
+                                            @if (Model.ActionName == "AddTimeLine")
+                                            {
+                                                @Model.Updated
+                                            }
+                                        </td>
+                                        <td class=" last">
+                                            <a asp-action="AddTimeLine">Güncelle</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="even pointer">
+                                        <td class=" ">Ülke Bilgileri</td>
+                                        <td class=" ">
+                                            @if (Model.ActionName == "AddToDb")
+                                            {
+                                                @Model.Updated
+                                            }
+                                        </td>
+                                        <td class=" last">
+                                            <a asp-action="AddToDb">Güncelle</a>
+                                        </td>
+                                    </tr>*@
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<!-- /page content -->

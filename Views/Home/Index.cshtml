@@ -1,0 +1,99 @@
+﻿@model KoronaTakipV2.Models.Data.Results
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@*<div class="row">
+        <div class="col-md-4">
+            <a class="btn btn-primary" asp-action="AddToDb"> Tüm verileri Güncelle</a>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-primary" asp-action="AddTimeLine"> TimeLine Ekle</a>
+        </div>
+        <div class="col-md-4 float-right">
+            <a class="btn btn-primary" asp-action="ShowAll"> Tüm verileri Görüntüle</a>
+        </div>
+
+    </div>*@
+
+<section class="section" id="services-2">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 text-center">
+                <div class="section-heading">
+                    <!-- Heading -->
+                    <h2 class="section-title mb-2 text-white">
+                        COVID-19 CORONAVIRUS PANDEMIC
+                    </h2>
+                </div>
+            </div>
+        </div> <!-- / .row -->
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalCases)</h3>
+                    <p>@Model.TotalCases</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalRecovered)</h3>
+                    <p>@Model.TotalRecovered</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalDeaths)</h3>
+                    <p>@Model.TotalDeaths</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalNewCasesToday)</h3>
+                    <p>@Model.TotalNewCasesToday</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30 ">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalNewDeathsToday)</h3>
+                    <p>@Model.TotalNewDeathsToday</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30 ">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalSeriousCases)</h3>
+                    <p>@Model.TotalSeriousCases</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30 ">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalUnresolved)</h3>
+                    <p>@Model.TotalUnresolved</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30 ">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalActiveCases)</h3>
+                    <p>@Model.TotalActiveCases</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-md-6 mb-30 ">
+                <div class="web-service-block">
+                    <h3>@Html.DisplayNameFor(model => model.TotalAffectedCountries)</h3>
+                    <p>@Model.TotalAffectedCountries</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+

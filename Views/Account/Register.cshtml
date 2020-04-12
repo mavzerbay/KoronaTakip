@@ -1,0 +1,49 @@
+﻿@using KoronaTakipV2.Models
+@using System.Threading.Tasks
+@model KoronaTakipV2.Models.LoginModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<div class="fadeIn first">
+    <img style="height:6em;width:6em;" class="mt-lg-2" src="~/images/ERBAY LOGO.png" id="icon" alt="User Icon" />
+</div>
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-danger">@TempData["message"]</div>
+}
+<!-- Login Form -->
+<form asp-action="Register" asp-controller="Account" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="text" id="login" class="fadeIn second" name="Username" asp-for="UserName" placeholder="Kullanıcı Adı"><br />
+    <span asp-validation-for="UserName" class="text-danger small"></span>
+
+    <input type="text" id="firstName" class="fadeIn second" asp-for="FirstName" name="Firstname" placeholder="Ad"><br />
+    <span asp-validation-for="FirstName" class="text-danger small"></span>
+
+    <input type="text" id="lastName" class="fadeIn second" asp-for="LastName" name="LastName" placeholder="Soyad"><br />
+    <span asp-validation-for="LastName" class="text-danger small"></span>
+
+    <input type="password" id="password" asp-for="Password" class="fadeIn second" name="Password" placeholder="Şifre"><br />
+    <span asp-validation-for="Password" class="text-danger small"></span>
+
+    <input type="password" id="confirmPassword" asp-for="ConfirmPassword" class="fadeIn second" name="ConfirmPassword" placeholder="Şifre Onay"><br />
+    <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+
+    <input type="email" id="email" class="fadeIn third" name="Email" asp-for="Email" placeholder="E-mail"><br />
+    <span asp-validation-for="Email" class="text-danger small"></span><br />
+
+    <input type="submit" class="fadeIn fourth" value="Giriş Yap">
+
+</form>
+
+<div class="card-footer">
+    <div class="d-flex justify-content-center links">
+        <a class="btn-circled" asp-action="Login">Girişe dön</a>
+    </div>
+</div>
+

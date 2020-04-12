@@ -1,0 +1,99 @@
+﻿@model CountryTimeLineViewModel
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="~/admin/build/js/custom.js"></script>
+    <script src="~/admin/build/js/custom.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: '@Url.Action("CountryDetail", "LineChart",new { code=Model.Code })',
+                success: function (result) {
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+                    google.charts.setOnLoadCallback(function () {
+                        drawChart(result);
+                    });
+                }
+            });
+        });
+        function drawChart(result) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Dates');
+            data.addColumn('number', 'Vakalar');
+            data.addColumn('number', 'Ölümler');
+            data.addColumn('number', 'Taburcu Edilenler');
+            var dataArray = [];
+            $.each(result, function (i, obj) {
+                dataArray.push([obj.dates, obj.cases, obj.deaths, obj.recovered]);
+            });
+            data.addRows(dataArray);
+
+            var columnChartOptions = {
+                title: "@Model.Title",
+                width: 1000,
+                height: 400,
+                colors: ["#057dff", "ff0008", "#00ff08"],
+                bar: { groupWidth: "20%" }
+            };
+
+            var columnChart = new google.visualization.LineChart(document.getElementById('columnchart_div'));
+
+            columnChart.draw(data, columnChartOptions);
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="mt-lg-5 pt-lg-5" style="width:5em;height:5em;padding-top:3.5em;margin-bottom:3em;">
+        <div class="col-1 text-center">
+            <a asp-controller="Home" asp-action="ShowAll" class="btn btn-sm btn-success btn-circled"><i class="fas fa-undo"> Geri Dön</i></a>
+        </div>
+    </div>
+    <div class="web-service-block pt-lg-3">
+
+
+
+        <div id="columnchart_div" class="table-responsive"></div>
+        <div id="echart_div"></div>
+
+        <div class="row table-responsive-sm">
+            <div class="col-lg-4 text-center">
+                <h1 class="alert alert-primary">@Model.TotalCases</h1>
+                <h4>Toplam Vaka Sayısı</h4>
+            </div>
+            <div class="col-lg-4 text-center">
+                <h1 class="alert alert-danger">@Model.TotalDeaths</h1>
+                <h4>Toplam Ölüm Sayısı</h4>
+            </div>
+            <div class="col-lg-4 text-center">
+                <h1 class="alert alert-success">@Model.TotalRecovered</h1>
+                <h4>Toplam İyileşen Sayısı</h4>
+            </div>
+        </div>
+        <div class="row table-responsive-lg">
+            <div class="col-lg-4 text-center">
+                <h1 class="alert alert-warning">@Model.TotalNewCasesToday</h1>
+                <h4>Günlük Yeni Vaka</h4>
+            </div>
+            <div class="col-lg-4 text-center">
+                <h1 class="alert alert-danger">@Model.TotalNewDeathsToday</h1>
+                <h4>Günlük Yeni Ölüm</h4>
+            </div>
+            <div class="col-lg-4 text-center">
+                <h1 class="alert alert-secondary">@Model.TotalSeriousCases</h1>
+                <h4>Yoğun Bakımda Olan</h4>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

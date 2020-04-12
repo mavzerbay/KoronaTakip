@@ -1,0 +1,87 @@
+﻿@using System.Data
+@model System.Data.DataTable
+
+@{
+    ViewData["Title"] = "ShowAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="web-service-block table-responsive">
+    <table class="table table-bordered table-hover main_table_countries dataTable no-footer">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Ülke Adı
+                </th>
+                <th scope="col">
+                    Toplam Vaka
+                </th>
+                <th scope="col">
+                    Toplam Ölüm
+                </th>
+                <th scope="col">
+                    Tedavi Edilen
+                </th>
+                <th scope="col">
+                    Günlük Yeni Vaka
+                </th>
+                <th scope="col">
+                    Günlük Yeni Ölüm
+                </th>
+                <th scope="col">
+                    Aktif Vakalar
+                </th>
+                <th scope="col">
+                    Yoğun Bakımda Olanlar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td scope="row">
+                        <a asp-action="Index" asp-controller="LineChart" asp-route-code="@row["Code"]">@row["Title"]</a>
+                    </td>
+                    <td>
+                        @row["TotalCases"]
+                    </td>
+                    <td>
+                        @row["TotalDeaths"]
+                    </td>
+                    <td class="alert alert-success">
+                        @row["TotalRecovered"]
+                    </td>
+                    <td class="alert alert-warning">
+                        @if (row["TotalNewCasesToday"].ToString() == "0")
+                        {
+                            <small>Yeni Vaka Yok</small>
+                        }
+                        else
+                        {
+                            <span> + </span> @row["TotalNewCasesToday"]
+                        }
+
+                    </td>
+                    <td class="alert alert-danger">
+                        @if (row["TotalNewDeathsToday"].ToString() == "0")
+                        {
+                            <small>Yeni Ölüm Yok</small>
+                        }
+                        else
+                        {
+                            <span> + </span> @row["TotalNewDeathsToday"]
+                        }
+
+                    </td>
+                    <td>
+                        @row["TotalActiveCases"]
+                    </td>
+                    <td class="alert alert-secondary">
+                        @row["TotalSeriousCases"]
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
